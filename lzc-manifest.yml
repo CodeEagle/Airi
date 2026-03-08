@@ -24,6 +24,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://airi:airi@postgres:5432/airi
       - API_SERVER_URL=https://${LAZYCAT_APP_DOMAIN}
+      - BETTER_AUTH_SECRET=${LAZYCAT_APP_ID}-${LAZYCAT_BOX_DOMAIN}-better-auth
       - AUTH_GOOGLE_CLIENT_ID=change-me
       - AUTH_GOOGLE_CLIENT_SECRET=change-me
       - AUTH_GITHUB_CLIENT_ID=change-me
@@ -34,20 +35,20 @@ services:
     healthcheck:
       test:
         - CMD-SHELL
-        - wget -qO- http://127.0.0.1:8080/health >/dev/null 2>&1 || exit 1
+        - curl -fsS http://127.0.0.1:8080/health >/dev/null || exit 1
       interval: 30s
       timeout: 10s
       retries: 5
       start_period: 90s
 
   postgres:
-    image: ghcr.io/tensorchord/vchord-postgres:pg18-v1.0.0
+    image: registry.lazycat.cloud/invokerlaw/tensorchord/vchord-postgres:9c991c715b94f6c0
     environment:
       - POSTGRES_USER=airi
       - POSTGRES_PASSWORD=airi
       - POSTGRES_DB=airi
     binds:
-      - /lzcapp/var/db/airi/postgres:/var/lib/postgresql/data
+      - /lzcapp/var/db/airi/postgres:/var/lib/postgresql
       - /lzcapp/var/db/airi/init:/lzcapp/var/db/airi/init
     setup_script: |
       mkdir -p /lzcapp/var/db/airi/init
