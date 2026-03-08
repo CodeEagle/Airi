@@ -1,4 +1,7 @@
 {
+  "upstream_repo": "moeru-ai/airi",
   "source_version": "v0.9.0-alpha.2",
-  "build_version": "0.9.0"
+  "build_version": "0.9.0-alpha.2",
+  "image": "ghcr.io/codeeagle/airi:v0.9.0-alpha.2",
+  "notes": "Target repo workflow only builds and pushes the GHCR main image. lzcat-trigger handles copy-image, manifest rewrite, lpk build, release, and optional store publish."
 }
