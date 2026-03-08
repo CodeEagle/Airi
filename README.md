@@ -122,5 +122,5 @@ bash ./scripts/validate-local.sh
 
 - 还没有完成真实 `.lpk` 安装验收，因此镜像源最好在交付前切到 `registry.lazycat.cloud/...` 再验证一次。
 - 当前工作区机器没有 `docker`，因此这次交付只能完成 `.lpk` 封包与目标仓库工作流适配，不能在本机直接构建 `airi` 镜像。
-- `version` 当前直接跟随上游 release tag 的 prerelease 口径 `0.9.0-alpha.2`；若目标环境只接受纯 `X.Y.Z`，需要在 workflow 中增加 `source_version` 与 `build_version` 分离逻辑。
+- `source_version` 保留上游真实 tag（如 `v0.9.0-alpha.2`），但 `version` / `build_version` 统一收敛为纯 `X.Y.Z`（当前为 `0.9.0`），以满足只接受 semver 主版本号的 LPK/商店环境。
 - 上游仓库很大，本仓库的工作流采用浅克隆指定 tag 构建，会比单镜像复制更耗时。
