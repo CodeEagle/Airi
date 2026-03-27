@@ -18,7 +18,7 @@ application:
     test_url: http://airi:8080/health
 services:
   airi:
-    image: registry.lazycat.cloud/invokerlaw/codeeagle/airi:3c69babcdf664a38
+    image: registry.lazycat.cloud/invokerlaw/codeeagle/airi:26ac52e363c9134d
     depends_on:
       - postgres
     environment:
